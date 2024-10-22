@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="weather.multi" name="Open-Meteo Lite" version="0.9.0" provider-name="Roman V.M.">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="script.module.simple-requests" />
-    </requires>
-    <extension point="xbmc.python.weather" library="main.py"/>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Weather forecast from Open-Meteo</summary>
-        <description lang="en_GB">Weather data provided by Open-Meteo.com: https://open-meteo.com/</description>
-        <platform>all</platform>
-        <license>GPL-3.0-only</license>
-        <forum></forum>
-        <source>https://github.com/romanvm/kodi.open-meteo.lite</source>
-        <assets>
-            <icon>resources/images/icon.png</icon>
-            <fanart>resources/images/fanart.jpg</fanart>
-        </assets>
-        <news>Initial release.</news>
-    </extension>
+<addon id="weather.multi"
+       name="Open-Meteo Lite"
+       version="0.9.0"
+       provider-name="Roman V.M.">
+ <requires>
+   <import addon="xbmc.python" version="3.0.0"/>
+   <import addon="script.module.simple-requests" />
+  </requires>
+  <extension point="xbmc.python.weather" library="main.py"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Weather forecast from Open-Meteo</summary>
+    <description lang="en_GB">Weather data provided by Open-Meteo.com: https://open-meteo.com/</description>
+    <platform>all</platform>
+    <license>GPL-3.0-only</license>
+    <forum></forum>
+    <source>https://github.com/romanvm/kodi.open-meteo.lite</source>
+    <assets>
+    <icon>resources/images/icon.png</icon>
+    <fanart>resources/images/fanart.jpg</fanart>
+    </assets>
+    <news>Initial release.</news>
+  </extension>
 </addon>
