@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings version="1">
   <section id="weather.open-meteo.lite">
-    <category id="locations" label="32000">
+    <category id="locations" label="Locations">
       <group id="1">
+        <setting id="location1" type="string" label="Location 1" help="">
+          <level>0</level>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="button" format="action">
+              <data>RunScript($ID,location1)</data>
+          </control>
+        </setting>
+        <setting id="location2" type="string" label="Location 2" help="">
+          <level>0</level>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="button" format="action">
+              <data>RunScript($ID,location2)</data>
+          </control>
+          <dependencies>
+            <dependency type="enable" operator="!is" setting="location1"></dependency>
+          </dependencies>
+        </setting>
+        <setting id="location3" type="string" label="Location 3" help="">
+          <level>0</level>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="button" format="action">
+              <data>RunScript($ID,location3)</data>
+          </control>
+          <dependencies>
+            <dependency type="enable" operator="!is" setting="location2"></dependency>
+          </dependencies>
+        </setting>
       </group>
     </category>
   </section>

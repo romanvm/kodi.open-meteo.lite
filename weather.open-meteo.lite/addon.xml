@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="weather.multi" name="Open-Meteo Lite" version="1.0.0" provider-name="Roman V.M.">
+<addon id="weather.multi" name="Open-Meteo Lite" version="0.9.0" provider-name="Roman V.M.">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.simple-requests" />

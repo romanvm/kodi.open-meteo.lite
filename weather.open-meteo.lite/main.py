@@ -12,3 +12,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+import sys
+
+import xbmc
+import xbmcaddon
+
+ADDON = xbmcaddon.Addon()
+ADDON_ID = ADDON.getAddonInfo('id')
+
+xbmc.log(f'[{ADDON_ID}] sys.argv: {sys.argv}', xbmc.LOGDEBUG)
