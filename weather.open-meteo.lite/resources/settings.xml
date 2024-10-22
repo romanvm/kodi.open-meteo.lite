@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings version="1">
+  <section id="weather.open-meteo.lite">
+    <category id="locations" label="32000">
+      <group id="1">
+      </group>
+    </category>
+  </section>
+</settings>
