@@ -10,7 +10,7 @@
   <extension point="xbmc.python.weather" library="main.py"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en_GB">Weather forecast from Open-Meteo</summary>
-    <description lang="en_GB">Weather data provided by Open-Meteo.com: https://open-meteo.com/</description>
+    <description lang="en_GB">Worldwide weather data provided by Open-Meteo.com: https://open-meteo.com/</description>
     <platform>all</platform>
     <license>GPL-3.0-only</license>
     <forum></forum>
