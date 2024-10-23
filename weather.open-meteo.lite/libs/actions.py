@@ -13,11 +13,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import logging
+import sys
 
-from libs.actions import main
-from libs.common.exception_logger import catch_exception
-from libs.common.kodi_service import initialize_logging
+from .common.kodi_service import GettextEmulator
 
-initialize_logging()
-with catch_exception():
-    main()
+_ = GettextEmulator.gettext
+
+logger = logging.getLogger(__name__)
+
+
+def set_location(location_id: str) -> None:
+    pass
+
+
+def populate_weather_info(location_no: str) -> None:
+    pass
+
+
+def main():
+    parameter = sys.argv[1]
+    if parameter.startswith('location'):
+        set_location(parameter)
+        return
+    populate_weather_info(parameter)

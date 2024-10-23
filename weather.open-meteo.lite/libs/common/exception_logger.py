@@ -1,4 +1,4 @@
-# (c) Roman Miroshnychenko <roman1972@gmail.com> 2023
+# (c) Roman Miroshnychenko, 2023
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,17 +15,16 @@
 """Exception logger with extended diagnostic info"""
 
 import inspect
+import logging
 import sys
 from contextlib import contextmanager
 from platform import uname
 from pprint import pformat
-from typing import Any, Dict, Callable, Generator, Iterable, Optional
+from typing import Any, Dict, Iterable, Optional
 
 import xbmc
 
-
-def _log_error(message: str) -> None:
-    xbmc.log(message, level=xbmc.LOGERROR)
+logger = logging.getLogger(__name__)
 
 
 def _format_vars(variables: Dict[str, Any]) -> str:
@@ -156,7 +155,7 @@ def format_exception(exc_obj: Optional[Exception] = None) -> str:
 
 
 @contextmanager
-def catch_exception(logger_func: Callable[[str], None] = _log_error) -> Generator[None, None, None]:
+def catch_exception(logger_func=logger.error):
     """
     Diagnostic helper context manager
 
