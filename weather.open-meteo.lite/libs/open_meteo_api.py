@@ -42,7 +42,7 @@ HEADERS = {
 }
 
 
-def _call_url(url, params):
+def _call_api(url, params):
     response = requests.get(url, params=params, headers=HEADERS.copy())
     if not response.ok:
         logger.error('Open-Meteo returned error %s: %s', response.status_code, response.text)
@@ -53,7 +53,7 @@ def _call_url(url, params):
 
 
 def search_location(name_query):
-    return _call_url(GEOCODING_API_URL, params={'name': name_query})
+    return _call_api(GEOCODING_API_URL, params={'name': name_query})
 
 
 def get_forecast(latitude, longitude, timezone):
@@ -61,4 +61,4 @@ def get_forecast(latitude, longitude, timezone):
     params['latitude'] = latitude
     params['longitude'] = longitude
     params['timezone'] = timezone
-    return _call_url(FORECAST_API_URL, params=params)
+    return _call_api(FORECAST_API_URL, params=params)
