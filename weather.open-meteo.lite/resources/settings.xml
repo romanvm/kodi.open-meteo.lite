@@ -10,8 +10,40 @@
               <allowempty>true</allowempty>
           </constraints>
           <control type="button" format="action">
-              <data>RunScript($ID,location1)</data>
+              <data>RunScript(weather.open-meteo.lite,location1)</data>
           </control>
+        </setting>
+        <setting id="location1_name" type="string" label="" help="">
+          <visible>false</visible>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="location1_lat" type="number" label="" help="">
+          <visible>false</visible>
+          <default>0.0</default>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="number" />
+        </setting>
+        <setting id="location1_lon" type="number" label="" help="">
+          <visible>false</visible>
+          <default>0.0</default>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="number" />
+        </setting>
+        <setting id="location1_timezone" type="string" label="" help="">
+          <visible>false</visible>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
         </setting>
         <setting id="location2" type="string" label="32003" help="">
           <level>0</level>
@@ -20,11 +52,43 @@
               <allowempty>true</allowempty>
           </constraints>
           <control type="button" format="action">
-              <data>RunScript($ID,location2)</data>
+              <data>RunScript(weather.open-meteo.lite,location2)</data>
           </control>
           <dependencies>
-            <dependency type="enable" operator="!is" setting="location1"></dependency>
+            <dependency type="enable" operator="!is" setting="location1" />
           </dependencies>
+        </setting>
+        <setting id="location2_name" type="string" label="" help="">
+          <visible>false</visible>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="location2_lat" type="number" label="" help="">
+          <visible>false</visible>
+          <default>0.0</default>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="number" />
+        </setting>
+        <setting id="location2_lon" type="number" label="" help="">
+          <visible>false</visible>
+          <default>0.0</default>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="number" />
+        </setting>
+        <setting id="location2_timezone" type="string" label="" help="">
+          <visible>false</visible>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
         </setting>
         <setting id="location3" type="string" label="32004" help="">
           <level>0</level>
@@ -33,11 +97,43 @@
               <allowempty>true</allowempty>
           </constraints>
           <control type="button" format="action">
-              <data>RunScript($ID,location3)</data>
+              <data>RunScript(weather.open-meteo.lite,location3)</data>
           </control>
           <dependencies>
-            <dependency type="enable" operator="!is" setting="location2"></dependency>
+            <dependency type="enable" operator="!is" setting="location2" />
           </dependencies>
+        </setting>
+        <setting id="location3_name" type="string" label="" help="">
+          <visible>false</visible>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="location3_lat" type="number" label="" help="">
+          <visible>false</visible>
+          <default>0.0</default>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="number" />
+        </setting>
+        <setting id="location3_lon" type="number" label="" help="">
+          <visible>false</visible>
+          <default>0.0</default>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="number" />
+        </setting>
+        <setting id="location3_timezone" type="string" label="" help="">
+          <visible>false</visible>
+          <default/>
+          <constraints>
+              <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
         </setting>
       </group>
     </category>

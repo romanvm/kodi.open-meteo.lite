@@ -19,5 +19,6 @@ from libs.common.exception_logger import catch_exception
 from libs.common.kodi_service import initialize_logging
 
 initialize_logging()
-with catch_exception():
-    main()
+if __name__ == '__main__':
+    with catch_exception():
+        main()

@@ -187,7 +187,7 @@ def catch_exception(logger_func=logger.error):
         yield
     except Exception as exc:
         message = format_exception(exc)
-        # pylint: disable=line-too-long
-        logger_func('\n*********************************** Unhandled exception detected ***********************************\n'
-                    + message)
+        logger_func('''
+*********************************** Unhandled exception detected ***********************************
+''' + message)
         raise

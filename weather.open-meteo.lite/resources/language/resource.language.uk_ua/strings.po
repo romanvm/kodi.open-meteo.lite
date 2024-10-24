@@ -5,7 +5,7 @@ msgstr ""
 
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: uk\n"
 
 msgctxt "#32001"
 msgid "Locations"

@@ -15,6 +15,7 @@
 
 import logging
 from pprint import pformat
+from typing import Dict, List, Any
 
 import simple_requests as requests
 
@@ -42,7 +43,7 @@ HEADERS = {
 }
 
 
-def _call_api(url, params):
+def _call_api(url: str, params: Dict[str, str]) -> Dict[str, Any]:
     response = requests.get(url, params=params, headers=HEADERS.copy())
     if not response.ok:
         logger.error('Open-Meteo returned error %s: %s', response.status_code, response.text)
@@ -52,11 +53,12 @@ def _call_api(url, params):
     return response_data
 
 
-def search_location(name_query):
-    return _call_api(GEOCODING_API_URL, params={'name': name_query})
+def search_location(name_query: str) -> List[Dict[str, Any]]:
+    result = _call_api(GEOCODING_API_URL, params={'name': name_query})
+    return result.get('results')
 
 
-def get_forecast(latitude, longitude, timezone):
+def get_forecast(latitude: float, longitude: float, timezone: str) -> Dict[str, Any]:
     params = FORECAST_API_BASE_PARAMS.copy()
     params['latitude'] = latitude
     params['longitude'] = longitude
