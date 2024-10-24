@@ -22,6 +22,7 @@ import xbmcgui
 
 from .common.kodi_service import ADDON, ADDON_ID, GettextEmulator
 from .open_meteo_api import search_location
+from .weather_info_service import populate_weather_info_for_location
 
 _ = GettextEmulator.gettext
 
@@ -102,6 +103,8 @@ def set_location(location_id: str) -> None:
 
 def populate_weather_info(location_no: str) -> None:
     logger.debug('Populating weather info for location_%s...', location_no)
+    location_id = f'location_{location_no}'
+    populate_weather_info_for_location(location_id)
 
 
 def main() -> None:

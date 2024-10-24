@@ -26,11 +26,11 @@ logger = logging.getLogger(__name__)
 GEOCODING_API_URL = 'https://geocoding-api.open-meteo.com/v1/search'
 FORECAST_API_URL = 'https://api.open-meteo.com/v1/forecast'
 FORECAST_API_BASE_PARAMS = {
-    'current': 'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,'
-               'weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m',
+    'current': 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,'
+               'weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,is_day',
     'hourly': 'temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,'
               'precipitation_probability,weather_code,surface_pressure,'
-              'wind_speed_10m,wind_direction_10m',
+              'wind_speed_10m,wind_direction_10m,is_day',
     'daily': 'weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,'
              'wind_speed_10m_max,wind_direction_10m_dominant',
     'format': 'json',
