@@ -9,160 +9,160 @@ msgstr ""
 
 msgctxt "#32001"
 msgid "Locations"
-msgstr ""
+msgstr "Розташування"
 
 msgctxt "#32002"
 msgid "Location 1"
-msgstr ""
+msgstr "Розташування 1"
 
 msgctxt "#32003"
 msgid "Location 2"
-msgstr ""
+msgstr "Розташування 2"
 
 msgctxt "#32004"
 msgid "Location 3"
-msgstr ""
+msgstr "Розташування 3"
 
 msgctxt "#32005"
 msgid "Enter location"
-msgstr ""
+msgstr "Уведіть розташування"
 
 msgctxt "#32006"
 msgid "Location is not entered"
-msgstr ""
+msgstr "Розташування не введено"
 
 msgctxt "#32007"
 msgid "Location not found"
-msgstr ""
+msgstr "Розташування не знайдено"
 
 msgctxt "#32008"
 msgid "No location selected"
-msgstr ""
+msgstr "Розташування не вибрано"
 
 msgctxt "#32009"
 msgid "Select location"
-msgstr ""
+msgstr "Виберіть розташування"
 
 msgctxt "#32010"
 msgid "Sunny"
-msgstr ""
+msgstr "Сонячно"
 
 msgctxt "#32011"
 msgid "Clear"
-msgstr ""
+msgstr "Ясно"
 
 msgctxt "#32012"
 msgid "Fair"
-msgstr ""
+msgstr "Невелика хмарність"
 
 msgctxt "#32013"
 msgid "Cloudy"
-msgstr ""
+msgstr "Хмарно з проясненнями"
 
 msgctxt "#32014"
 msgid "Overcast"
-msgstr ""
+msgstr "Хмарно"
 
 msgctxt "#32015"
 msgid "Fog"
-msgstr ""
+msgstr "Туман"
 
 msgctxt "#32016"
 msgid "Fog with rime"
-msgstr ""
+msgstr "Туман з інеєм"
 
 msgctxt "#32017"
 msgid "Light drizzle"
-msgstr ""
+msgstr "Невелика мряка"
 
 msgctxt "#32018"
 msgid "Drizzle"
-msgstr ""
+msgstr "Мряка"
 
 msgctxt "#32019"
 msgid "Heavy drizzle"
-msgstr ""
+msgstr "Густа мряка"
 
 msgctxt "#32020"
 msgid "Freezing drizzle"
-msgstr ""
+msgstr "Холодна мряка"
 
 msgctxt "#32021"
 msgid "Light rain"
-msgstr ""
+msgstr "Невеликий дощ"
 
 msgctxt "#32022"
 msgid "Rain"
-msgstr ""
+msgstr "Дощ"
 
 msgctxt "#32023"
 msgid "Heavy rain"
-msgstr ""
+msgstr "Сильний дощ"
 
 msgctxt "#32024"
 msgid "Freezing rain"
-msgstr ""
+msgstr "Холодний дощ"
 
 msgctxt "#32025"
 msgid "Light snow"
-msgstr ""
+msgstr "Невеликий сніг"
 
 msgctxt "#32026"
 msgid "Snow"
-msgstr ""
+msgstr "Сніг"
 
 msgctxt "#32027"
 msgid "Heavy snow"
-msgstr ""
+msgstr "Сильний сніг"
 
 msgctxt "#32028"
 msgid "Snow grains"
-msgstr ""
+msgstr "Сніжна крупа"
 
 msgctxt "#32029"
 msgid "Rain showers"
-msgstr ""
+msgstr "Злива"
 
 msgctxt "#32030"
 msgid "Snow showers"
-msgstr ""
+msgstr "Снігопад"
 
 msgctxt "#32031"
 msgid "Thunderstorm"
-msgstr ""
+msgstr "Гроза"
 
 msgctxt "#32032"
 msgid "Thunderstorm with hail"
-msgstr ""
+msgstr "Гроза з градом"
 
 msgctxt "#32033"
 msgid "N"
-msgstr ""
+msgstr "Пн"
 
 msgctxt "#32034"
 msgid "NE"
-msgstr ""
+msgstr "ПнСх"
 
 msgctxt "#32035"
 msgid "E"
-msgstr ""
+msgstr "Сх"
 
 msgctxt "#32036"
 msgid "SE"
-msgstr ""
+msgstr "ПдСх"
 
 msgctxt "#32037"
 msgid "S"
-msgstr ""
+msgstr "Пд"
 
 msgctxt "#32038"
 msgid "SW"
-msgstr ""
+msgstr "ПдЗах"
 
 msgctxt "#32039"
 msgid "W"
-msgstr ""
+msgstr "Зах"
 
 msgctxt "#32040"
 msgid "NW"
-msgstr ""
+msgstr "ПнЗах"
