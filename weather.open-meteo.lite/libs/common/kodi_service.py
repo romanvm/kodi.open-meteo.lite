@@ -176,18 +176,20 @@ def cache_json(ttl_minutes=60):
     def outer_wrapper(func):
         @wraps(func)
         def inner_wrapper(*args, **kwargs):
-            now = int(time.time())
+            cache = {}
             cache_file = PROFILE / f'{func.__name__}_cache.json'
-            try:
+            if cache_file.exists():
                 with cache_file.open('r', encoding='utf-8') as fo:
                     cache = json.load(fo)
-                if cache['timestamp'] + ttl_minutes * 60 < now:
-                    raise IOError
-                return cache['data']
-            except IOError:
-                data = func(*args, **kwargs)
-                with cache_file.open('w', encoding='utf-8') as fo:
-                    json.dump({'timestamp': now, 'data': data}, fo)
-                return data
+            params = f'{args}_{kwargs}'
+            params_cache = cache.get(params)
+            now = int(time.time())
+            if params_cache is not None and params_cache['timestamp'] + ttl_minutes * 60 > now:
+                return params_cache['data']
+            data = func(*args, **kwargs)
+            cache[params] = {'timestamp': now, 'data': data}
+            with cache_file.open('w', encoding='utf-8') as fo:
+                json.dump(cache, fo)
+            return data
         return inner_wrapper
     return outer_wrapper
