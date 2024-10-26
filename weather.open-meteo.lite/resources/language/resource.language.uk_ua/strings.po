@@ -42,3 +42,127 @@ msgstr ""
 msgctxt "#32009"
 msgid "Select location"
 msgstr ""
+
+msgctxt "#32010"
+msgid "Sunny"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Clear"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Fair"
+msgstr ""
+
+msgctxt "#32013"
+msgid "Cloudy"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Overcast"
+msgstr ""
+
+msgctxt "#32015"
+msgid "Fog"
+msgstr ""
+
+msgctxt "#32016"
+msgid "Fog with rime"
+msgstr ""
+
+msgctxt "#32017"
+msgid "Light drizzle"
+msgstr ""
+
+msgctxt "#32018"
+msgid "Drizzle"
+msgstr ""
+
+msgctxt "#32019"
+msgid "Heavy drizzle"
+msgstr ""
+
+msgctxt "#32020"
+msgid "Freezing drizzle"
+msgstr ""
+
+msgctxt "#32021"
+msgid "Light rain"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Rain"
+msgstr ""
+
+msgctxt "#32023"
+msgid "Heavy rain"
+msgstr ""
+
+msgctxt "#32024"
+msgid "Freezing rain"
+msgstr ""
+
+msgctxt "#32025"
+msgid "Light snow"
+msgstr ""
+
+msgctxt "#32026"
+msgid "Snow"
+msgstr ""
+
+msgctxt "#32027"
+msgid "Heavy snow"
+msgstr ""
+
+msgctxt "#32028"
+msgid "Snow grains"
+msgstr ""
+
+msgctxt "#32029"
+msgid "Rain showers"
+msgstr ""
+
+msgctxt "#32030"
+msgid "Snow showers"
+msgstr ""
+
+msgctxt "#32031"
+msgid "Thunderstorm"
+msgstr ""
+
+msgctxt "#32032"
+msgid "Thunderstorm with hail"
+msgstr ""
+
+msgctxt "#32033"
+msgid "N"
+msgstr ""
+
+msgctxt "#32034"
+msgid "NE"
+msgstr ""
+
+msgctxt "#32035"
+msgid "E"
+msgstr ""
+
+msgctxt "#32036"
+msgid "SE"
+msgstr ""
+
+msgctxt "#32037"
+msgid "S"
+msgstr ""
+
+msgctxt "#32038"
+msgid "SW"
+msgstr ""
+
+msgctxt "#32039"
+msgid "W"
+msgstr ""
+
+msgctxt "#32040"
+msgid "NW"
+msgstr ""

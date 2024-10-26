@@ -14,6 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
+from datetime import datetime, timedelta
 from pprint import pformat
 from typing import Dict, List, Any
 
@@ -27,15 +28,19 @@ GEOCODING_API_URL = 'https://geocoding-api.open-meteo.com/v1/search'
 FORECAST_API_URL = 'https://api.open-meteo.com/v1/forecast'
 FORECAST_API_BASE_PARAMS = {
     'current': 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,'
-               'weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,is_day',
+               'weather_code,wind_speed_10m,wind_direction_10m,is_day',
     'hourly': 'temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,'
               'precipitation_probability,weather_code,surface_pressure,'
-              'wind_speed_10m,wind_direction_10m,is_day',
-    'daily': 'weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,'
-             'wind_speed_10m_max,wind_direction_10m_dominant',
+              'wind_speed_10m,wind_direction_10m,cloud_cover,is_day',
+    'daily': 'weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,'
+             'precipitation_probability_mean,'
+             'wind_speed_10m_max,wind_direction_10m_dominant,sunrise,sunset,uv_index_max',
     'format': 'json',
     'timeformat': 'iso8601',
 }
+
+OPEN_METEO_DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M'
+OPEN_METEO_DATE_FORMAT = '%Y-%m-%d'
 
 HEADERS = {
     'User-Agent': f'Open-Meteo Lite for Kodi v.{VERSION}',
@@ -60,7 +65,15 @@ def search_location(name_query: str) -> List[Dict[str, Any]]:
 
 def get_forecast(latitude: float, longitude: float, timezone: str) -> Dict[str, Any]:
     params = FORECAST_API_BASE_PARAMS.copy()
-    params['latitude'] = latitude
-    params['longitude'] = longitude
+    params['latitude'] = str(latitude)
+    params['longitude'] = str(longitude)
     params['timezone'] = timezone
+    start_hour = datetime.now().replace(minute=0, second=0, microsecond=0)
+    params['start_hour'] = start_hour.strftime(OPEN_METEO_DATE_TIME_FORMAT)
+    end_hour = start_hour + timedelta(hours=23)
+    params['end_hour'] = end_hour.strftime(OPEN_METEO_DATE_TIME_FORMAT)
+    start_date = start_hour.date()
+    params['start_date'] = start_date.strftime(OPEN_METEO_DATE_FORMAT)
+    end_date = start_date + timedelta(days=10)
+    params['end_date'] = end_date.strftime(OPEN_METEO_DATE_FORMAT)
     return _call_api(FORECAST_API_URL, params=params)

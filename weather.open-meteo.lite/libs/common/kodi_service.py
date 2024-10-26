@@ -13,10 +13,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import datetime
 import hashlib
 import json
 import logging
 import re
+import time
 from pathlib import Path
 
 import xbmc
@@ -25,13 +27,24 @@ from xbmcvfs import translatePath
 
 ADDON = Addon()
 ADDON_ID = ADDON.getAddonInfo('id')
+ADDON_NAME = ADDON.getAddonInfo('name')
 VERSION = ADDON.getAddonInfo('version')
 
 PATH = Path(translatePath(ADDON.getAddonInfo('path')))
 PROFILE = Path(translatePath(ADDON.getAddonInfo('profile')))
-ICON = str(PATH / 'icon.png')
+ICON = PATH / 'resources'/ 'images' / 'icon.png'
 
 LOG_FORMAT = '[{addon_id} v.{addon_version}] {filename}:{lineno} - {message}'
+
+
+class Proxydt(datetime.datetime):
+    """Ugly patch for Kodi datetime problem"""
+    @classmethod
+    def strptime(cls, date_string, format):
+        return datetime.datetime(*(time.strptime(date_string, format)[:6]))
+
+
+datetime.datetime = Proxydt
 
 
 class KodiLogHandler(logging.Handler):

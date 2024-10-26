@@ -103,7 +103,7 @@ def set_location(location_id: str) -> None:
 
 def populate_weather_info(location_no: str) -> None:
     logger.debug('Populating weather info for location_%s...', location_no)
-    location_id = f'location_{location_no}'
+    location_id = f'location{location_no}'
     populate_weather_info_for_location(location_id)
 
 
