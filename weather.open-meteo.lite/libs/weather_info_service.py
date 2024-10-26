@@ -12,6 +12,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>
+"""
+This module includes functions that are responsible for populating various weather-related
+properties of the Weather window (id=12600)
+"""
 
 import logging
 from datetime import datetime, date
@@ -37,7 +41,6 @@ LONG_DATE_FORMAT = xbmc.getRegion('datelong')
 SHORT_DATE_FORMAT = xbmc.getRegion('dateshort')
 TIME_FORMAT = xbmc.getRegion('time').replace(':%S', '')
 TEMPERATURE_UNIT = xbmc.getRegion('tempunit')
-WIND_SPEED_UNIT = xbmc.getRegion('speedunit')
 
 
 class LocationData(NamedTuple):
@@ -107,6 +110,14 @@ class DailyWeather(NamedTuple):
         )
 
 
+def _get_location_data(location_id: str) -> LocationData:
+    name = ADDON.getSettingString(f'{location_id}_name')
+    latitude = ADDON.getSettingNumber(f'{location_id}_lat')
+    longitude = ADDON.getSettingNumber(f'{location_id}_lon')
+    timezone = ADDON.getSettingString(f'{location_id}_timezone')
+    return LocationData(name, latitude, longitude, timezone)
+
+
 def _populate_current_weather(current_info: Dict[str, Any]) -> None:
     open_meteo_weather_code = current_info['weather_code']
     is_day = bool(current_info['is_day'])
@@ -124,14 +135,6 @@ def _populate_current_weather(current_info: Dict[str, Any]) -> None:
     logger.debug('Populating current weather:\n%s', pformat(window_properties_map))
     for prop, value in window_properties_map.items():
         WEATHER_WINDOW.setProperty(prop, value)
-
-
-def _get_location_data(location_id: str) -> LocationData:
-    name = ADDON.getSettingString(f'{location_id}_name')
-    latitude = ADDON.getSettingNumber(f'{location_id}_lat')
-    longitude = ADDON.getSettingNumber(f'{location_id}_lon')
-    timezone = ADDON.getSettingString(f'{location_id}_timezone')
-    return LocationData(name, latitude, longitude, timezone)
 
 
 def _populate_hourly_weather(hourly_info: Dict[str, List[Any]]) -> None:
@@ -202,7 +205,7 @@ def _populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
         }
         if i <= 7:
             day_prefix = f'Day{i - 1}'
-            # Used in some skins
+            # These properties are used in some skins, e.g. aeon.nox.silvo
             window_properties_map.update({
                 f'{day_prefix}.Title': daily_weather.time.strftime('%A'),
                 f'{day_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code,
@@ -226,6 +229,13 @@ def _populate_general_properties(location_name: str) -> None:
     WEATHER_WINDOW.setProperty('Current.IsFetched', 'true')
     WEATHER_WINDOW.setProperty('Hourly.IsFetched', 'true')
     WEATHER_WINDOW.setProperty('Daily.IsFetched', 'true')
+    locations = 0
+    for i in range(1, 4):
+        location_name = ADDON.getSettingString(f'location{i}_name')
+        if location_name:
+            locations += 1
+        WEATHER_WINDOW.setProperty(f'Location{i}', location_name)
+    WEATHER_WINDOW.setProperty('Locations', str(locations))
 
 
 def populate_weather_info_for_location(location_id: str) -> None:
