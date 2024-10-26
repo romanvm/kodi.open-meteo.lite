@@ -20,7 +20,7 @@ from typing import Dict, List, Any
 
 import simple_requests as requests
 
-from libs.common.kodi_service import VERSION
+from libs.common.kodi_service import VERSION, cache_json
 
 logger = logging.getLogger(__name__)
 
@@ -63,6 +63,7 @@ def search_location(name_query: str) -> List[Dict[str, Any]]:
     return result.get('results')
 
 
+@cache_json()
 def get_forecast(latitude: float, longitude: float, timezone: str) -> Dict[str, Any]:
     params = FORECAST_API_BASE_PARAMS.copy()
     params['latitude'] = str(latitude)
