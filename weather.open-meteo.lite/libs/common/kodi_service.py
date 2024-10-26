@@ -40,7 +40,7 @@ LOG_FORMAT = '[{addon_id} v.{addon_version}] {filename}:{lineno} - {message}'
 class Proxydt(datetime.datetime):
     """Ugly patch for Kodi datetime problem"""
     @classmethod
-    def strptime(cls, date_string, format):
+    def strptime(cls, date_string, format):  # # pylint: disable=redefined-builtin
         return datetime.datetime(*(time.strptime(date_string, format)[:6]))
 
 

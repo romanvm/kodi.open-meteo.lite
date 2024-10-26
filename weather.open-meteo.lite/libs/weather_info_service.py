@@ -21,9 +21,13 @@ from typing import NamedTuple, Dict, List, Any
 import xbmc
 from xbmcgui import Window
 
-from .common.kodi_service import ADDON, ICON, ADDON_NAME
-from .converter_service import get_weather_condition_label, get_kodi_weather_code, get_wind_direction
-from .open_meteo_api import get_forecast, OPEN_METEO_DATE_TIME_FORMAT, OPEN_METEO_DATE_FORMAT
+from libs.common.kodi_service import ADDON, ICON, ADDON_NAME
+from libs.converter_service import (
+    get_weather_condition_label,
+    get_kodi_weather_code,
+    get_wind_direction
+)
+from libs.open_meteo_api import get_forecast, OPEN_METEO_DATE_TIME_FORMAT, OPEN_METEO_DATE_FORMAT
 
 logger = logging.getLogger(__name__)
 
@@ -103,7 +107,7 @@ class DailyWeather(NamedTuple):
         )
 
 
-def populate_current_weather(current_info: Dict[str, Any]) -> None:
+def _populate_current_weather(current_info: Dict[str, Any]) -> None:
     open_meteo_weather_code = current_info['weather_code']
     is_day = bool(current_info['is_day'])
     kodi_weather_code = get_kodi_weather_code(open_meteo_weather_code, is_day)
@@ -130,7 +134,7 @@ def _get_location_data(location_id: str) -> LocationData:
     return LocationData(name, latitude, longitude, timezone)
 
 
-def populate_hourly_weather(hourly_info: Dict[str, List[Any]]) -> None:
+def _populate_hourly_weather(hourly_info: Dict[str, List[Any]]) -> None:
     keys = tuple(hourly_info.keys())
     first_hour = True
     for i, values in enumerate(zip(*hourly_info.values()), 1):
@@ -157,7 +161,8 @@ def populate_hourly_weather(hourly_info: Dict[str, List[Any]]) -> None:
             f'{hourly_prefix}.Humidity': str(hourly_weather.relative_humidity_2m),
             f'{hourly_prefix}.Temperature': str(hourly_weather.temperature_2m) + TEMPERATURE_UNIT,
             f'{hourly_prefix}.DewPoint': str(hourly_weather.dew_point_2m),
-            f'{hourly_prefix}.FeelsLike': str(hourly_weather.apparent_temperature) + TEMPERATURE_UNIT,
+            f'{hourly_prefix}.FeelsLike': (str(hourly_weather.apparent_temperature)
+                                           + TEMPERATURE_UNIT),
             f'{hourly_prefix}.Pressure': str(hourly_weather.surface_pressure),
             f'{hourly_prefix}.Precipitation': str(hourly_weather.precipitation_probability) + '%',
         }
@@ -166,7 +171,7 @@ def populate_hourly_weather(hourly_info: Dict[str, List[Any]]) -> None:
             WEATHER_WINDOW.setProperty(prop, value)
 
 
-def populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
+def _populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
     keys = tuple(daily_info.keys())
     first_day = True
     for i, values in enumerate(zip(*daily_info.values()), 1):
@@ -174,28 +179,34 @@ def populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
         if first_day:
             WEATHER_WINDOW.setProperty('Today.Sunrise', daily_weather.sunrise.strftime(TIME_FORMAT))
             WEATHER_WINDOW.setProperty('Today.Sunset', daily_weather.sunset.strftime(TIME_FORMAT))
-            WEATHER_WINDOW.setProperty('Current.UVIndex', str(daily_weather.uv_index_max)),
+            WEATHER_WINDOW.setProperty('Current.UVIndex', str(daily_weather.uv_index_max))
             first_day = False
         daily_prefix = f'Daily.{i}'
         kodi_weather_code = get_kodi_weather_code(daily_weather.weather_code, is_day=True)
         window_properties_map = {
             f'{daily_prefix}.ShortDate': daily_weather.time.strftime(SHORT_DATE_FORMAT),
             f'{daily_prefix}.ShortDay': daily_weather.time.strftime('%a'),
-            f'{daily_prefix}.HighTemperature': str(daily_weather.temperature_2m_max) + TEMPERATURE_UNIT,
-            f'{daily_prefix}.LowTemperature': str(daily_weather.temperature_2m_min) + TEMPERATURE_UNIT,
-            f'{daily_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code, is_day=True),
+            f'{daily_prefix}.HighTemperature': (str(daily_weather.temperature_2m_max)
+                                                + TEMPERATURE_UNIT),
+            f'{daily_prefix}.LowTemperature': (str(daily_weather.temperature_2m_min)
+                                               + TEMPERATURE_UNIT),
+            f'{daily_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code,
+                                                                   is_day=True),
             f'{daily_prefix}.OutlookIcon': f'{kodi_weather_code}.png',
             f'{daily_prefix}.FanartCode': kodi_weather_code,
             f'{daily_prefix}.WindSpeed': str(daily_weather.wind_speed_10m_max),
-            f'{daily_prefix}.WindDirection': get_wind_direction(daily_weather.wind_direction_10m_dominant),
-            f'{daily_prefix}.Precipitation': str(daily_weather.precipitation_probability_mean) + '%',
+            f'{daily_prefix}.WindDirection': get_wind_direction(
+                daily_weather.wind_direction_10m_dominant),
+            f'{daily_prefix}.Precipitation': (str(daily_weather.precipitation_probability_mean)
+                                              + '%'),
         }
         if i <= 7:
             day_prefix = f'Day{i - 1}'
             # Used in some skins
             window_properties_map.update({
                 f'{day_prefix}.Title': daily_weather.time.strftime('%A'),
-                f'{day_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code, is_day=True),
+                f'{day_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code,
+                                                                     is_day=True),
                 f'{day_prefix}.OutlookIcon': f'{kodi_weather_code}.png',
                 f'{day_prefix}.FanartCode': kodi_weather_code,
                 f'{day_prefix}.HighTemp': str(daily_weather.temperature_2m_max) + TEMPERATURE_UNIT,
@@ -206,7 +217,7 @@ def populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
             WEATHER_WINDOW.setProperty(prop, value)
 
 
-def populate_general_properties(location_name: str) -> None:
+def _populate_general_properties(location_name: str) -> None:
     WEATHER_WINDOW.setProperty('Location', location_name)
     WEATHER_WINDOW.setProperty('Current.Location', location_name)
     WEATHER_WINDOW.setProperty('WeatherProvider', ADDON_NAME)
@@ -220,7 +231,7 @@ def populate_general_properties(location_name: str) -> None:
 def populate_weather_info_for_location(location_id: str) -> None:
     location_data = _get_location_data(location_id)
     forecast_info = get_forecast(*location_data[1:])
-    populate_current_weather(forecast_info['current'])
-    populate_hourly_weather(forecast_info['hourly'])
-    populate_daily_weather(forecast_info['daily'])
-    populate_general_properties(location_data.name)
+    _populate_current_weather(forecast_info['current'])
+    _populate_hourly_weather(forecast_info['hourly'])
+    _populate_daily_weather(forecast_info['daily'])
+    _populate_general_properties(location_data.name)

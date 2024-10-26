@@ -15,7 +15,7 @@
 
 import enum
 
-from .common.kodi_service import GettextEmulator
+from libs.common.kodi_service import GettextEmulator
 
 _ = GettextEmulator.gettext
 
@@ -79,8 +79,14 @@ class OpenMeteoWeatherCode(enum.IntEnum):
 WEATHER_CODES_MAP = {
     OpenMeteoWeatherCode.CLEAR: [KodiWeatherCode.SUNNY, KodiWeatherCode.CLEAR_NIGHT],
     OpenMeteoWeatherCode.CLOUDY_1: [KodiWeatherCode.FAIR_DAY, KodiWeatherCode.FAIR_NIGHT],
-    OpenMeteoWeatherCode.CLOUDY_2: [KodiWeatherCode.PARTLY_CLOUDY_DAY, KodiWeatherCode.PARTLY_CLOUDY_NIGHT],
-    OpenMeteoWeatherCode.CLOUDY_3: [KodiWeatherCode.MOSTLY_CLOUDY_DAY, KodiWeatherCode.MOSTLY_CLOUDY_NIGHT],
+    OpenMeteoWeatherCode.CLOUDY_2: [
+        KodiWeatherCode.PARTLY_CLOUDY_DAY,
+        KodiWeatherCode.PARTLY_CLOUDY_NIGHT,
+    ],
+    OpenMeteoWeatherCode.CLOUDY_3: [
+        KodiWeatherCode.MOSTLY_CLOUDY_DAY,
+        KodiWeatherCode.MOSTLY_CLOUDY_NIGHT,
+    ],
     OpenMeteoWeatherCode.FOG: KodiWeatherCode.FOGGY,
     OpenMeteoWeatherCode.FOG_WITH_RIME: KodiWeatherCode.FOGGY,
     OpenMeteoWeatherCode.DRIZZLE_1: KodiWeatherCode.DRIZZLE,

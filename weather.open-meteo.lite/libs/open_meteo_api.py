@@ -20,7 +20,7 @@ from typing import Dict, List, Any
 
 import simple_requests as requests
 
-from .common.kodi_service import VERSION
+from libs.common.kodi_service import VERSION
 
 logger = logging.getLogger(__name__)
 

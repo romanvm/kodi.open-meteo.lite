@@ -187,6 +187,7 @@ def catch_exception(logger_func=logger.error):
         yield
     except Exception as exc:
         message = format_exception(exc)
+        # pylint: disable=logging-not-lazy
         logger_func('''
 *********************************** Unhandled exception detected ***********************************
 ''' + message)

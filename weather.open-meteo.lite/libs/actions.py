@@ -20,9 +20,9 @@ from typing import Dict, Any
 import xbmc
 import xbmcgui
 
-from .common.kodi_service import ADDON, ADDON_ID, GettextEmulator
-from .open_meteo_api import search_location
-from .weather_info_service import populate_weather_info_for_location
+from libs.common.kodi_service import ADDON, ADDON_ID, GettextEmulator
+from libs.open_meteo_api import search_location
+from libs.weather_info_service import populate_weather_info_for_location
 
 _ = GettextEmulator.gettext
 
@@ -53,6 +53,7 @@ def _save_location_info(location_id: str,
     ADDON.setSettingNumber(f'{location_id}_lat', location_info['latitude'])
     ADDON.setSettingNumber(f'{location_id}_lon', location_info['longitude'])
     ADDON.setSettingString(f'{location_id}_timezone', location_info['timezone'])
+    logger.debug('Location "%s" was set for %s', full_location_name, location_id)
 
 
 def set_location(location_id: str) -> None:
@@ -65,6 +66,7 @@ def set_location(location_id: str) -> None:
     keyboard.doModal()
     location_name = keyboard.getText()
     if not location_name:
+        logger.debug('Location is not entered')
         DIALOG.notification(
             ADDON_ID,
             _('Location is not entered'),
@@ -73,6 +75,7 @@ def set_location(location_id: str) -> None:
         return
     location_results = search_location(location_name)
     if not location_results:
+        logger.debug('Location not found: %s', location_name)
         DIALOG.notification(
             ADDON_ID,
             _('Location not found'),
@@ -98,7 +101,6 @@ def set_location(location_id: str) -> None:
     full_location_name = location_options[selection]
     location_info = location_results[selection]
     _save_location_info(location_id, full_location_name, location_info)
-    logger.debug('Location "%s" was set for %s', full_location_name, location_id)
 
 
 def populate_weather_info(location_no: str) -> None:
