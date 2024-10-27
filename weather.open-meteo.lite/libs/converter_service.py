@@ -227,7 +227,7 @@ def get_wind_speed(wind_speed_kmh: float, speed_unit: str) -> str:
     if speed_unit == 'm/s':
         return str(round(wind_speed_kmh / 3.6)) + speed_unit
     if speed_unit == 'mph':
-        return str(round(wind_speed_kmh * 0.621371, 1)) + speed_unit
+        return str(round(wind_speed_kmh * 0.621, 1)) + speed_unit
     if speed_unit == 'Beaufort':
         return f'{_wind_speed_to_beaufort(wind_speed_kmh)} {speed_unit}'
     return str(wind_speed_kmh) + _('km/h')
