@@ -170,3 +170,15 @@ msgstr "ПнЗах"
 msgctxt "#32041"
 msgid "km/h"
 msgstr "км/г"
+
+msgctxt "#32042"
+msgid "m/s"
+msgstr "м/с"
+
+msgctxt "#32043"
+msgid "mph"
+msgstr "миль/год"
+
+msgctxt "#32044"
+msgid "Beaufort"
+msgstr "б. за Боф."

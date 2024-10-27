@@ -128,7 +128,7 @@ def _populate_current_weather(current_info: Dict[str, Any]) -> None:
     window_properties_map = {
         'Current.Condition': get_weather_condition_label(open_meteo_weather_code, is_day),
         'Current.Temperature': str(round(current_info['temperature_2m'])),
-        'Current.Wind': get_wind_speed(current_info['wind_speed_10m'], SPEED_UNIT),
+        'Current.Wind': str(current_info['wind_speed_10m']),
         'Current.WindDirection': get_wind_direction(current_info['wind_direction_10m']),
         'Current.Humidity': str(round(current_info['relative_humidity_2m'])),
         'Current.FeelsLike': str(round(current_info['apparent_temperature'])),
