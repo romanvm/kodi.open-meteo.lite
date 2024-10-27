@@ -123,6 +123,7 @@ def get_kodi_weather_code(open_meteo_code: int, is_day: bool) -> str:
     return kodi_code.value
 
 
+# Weather labels are limited mostly to 2-word phrases because of UI space considerations
 WEATHER_CONDITION_LABELS_MAP = {
     OpenMeteoWeatherCode.CLEAR: [_('Sunny'), _('Clear')],
     OpenMeteoWeatherCode.CLOUDY_1: _('Fair'),

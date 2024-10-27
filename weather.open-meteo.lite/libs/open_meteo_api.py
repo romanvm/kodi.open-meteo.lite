@@ -75,6 +75,6 @@ def get_forecast(latitude: float, longitude: float, timezone: str) -> Dict[str, 
     params['end_hour'] = end_hour.strftime(OPEN_METEO_DATE_TIME_FORMAT)
     start_date = start_hour.date()
     params['start_date'] = start_date.strftime(OPEN_METEO_DATE_FORMAT)
-    end_date = start_date + timedelta(days=10)
+    end_date = start_date + timedelta(days=9)
     params['end_date'] = end_date.strftime(OPEN_METEO_DATE_FORMAT)
     return _call_api(FORECAST_API_URL, params=params)
