@@ -27,10 +27,9 @@ class KodiWeatherCode(enum.Enum):
     CLEAR_NIGHT = '31'
     FAIR_DAY = '34'
     FAIR_NIGHT = '33'
-    PARTLY_CLOUDY_DAY = '30'
-    PARTLY_CLOUDY_NIGHT = '31'
-    MOSTLY_CLOUDY_DAY = '28'
-    MOSTLY_CLOUDY_NIGHT = '27'
+    PARTLY_CLOUDY_DAY = '28'
+    PARTLY_CLOUDY_NIGHT = '27'
+    MOSTLY_CLOUDY = '26'
     FOGGY = '20'
     DRIZZLE = '9'
     FREEZING_DRIZZLE = '8'
@@ -38,11 +37,13 @@ class KodiWeatherCode(enum.Enum):
     FREEZING_RAIN = '10'
     LIGHT_SNOW_SHOWERS = '14'
     SNOW = '16'
-    HEAVY_SNOW = '41'
+    HEAVY_SNOW = '15'
     SLEET = '18'
+    LIGHT_SHOWERS = '11'
     SHOWERS = '12'
+    HEAVY_RAIN = '1'
     SNOW_SHOWERS = '46'
-    THUNDERSTORMS = '4'
+    THUNDERSTORMS = '3'
     HAIL = '17'
 
 
@@ -84,10 +85,7 @@ WEATHER_CODES_MAP = {
         KodiWeatherCode.PARTLY_CLOUDY_DAY,
         KodiWeatherCode.PARTLY_CLOUDY_NIGHT,
     ],
-    OpenMeteoWeatherCode.CLOUDY_3: [
-        KodiWeatherCode.MOSTLY_CLOUDY_DAY,
-        KodiWeatherCode.MOSTLY_CLOUDY_NIGHT,
-    ],
+    OpenMeteoWeatherCode.CLOUDY_3: KodiWeatherCode.MOSTLY_CLOUDY,
     OpenMeteoWeatherCode.FOG: KodiWeatherCode.FOGGY,
     OpenMeteoWeatherCode.FOG_WITH_RIME: KodiWeatherCode.FOGGY,
     OpenMeteoWeatherCode.DRIZZLE_1: KodiWeatherCode.DRIZZLE,
@@ -95,19 +93,19 @@ WEATHER_CODES_MAP = {
     OpenMeteoWeatherCode.DRIZZLE_3: KodiWeatherCode.DRIZZLE,
     OpenMeteoWeatherCode.FREEZING_DRIZZLE_1: KodiWeatherCode.FREEZING_DRIZZLE,
     OpenMeteoWeatherCode.FREEZING_DRIZZLE_2: KodiWeatherCode.FREEZING_DRIZZLE,
-    OpenMeteoWeatherCode.RAIN_1: KodiWeatherCode.SCATTERED_SHOWERS,
+    OpenMeteoWeatherCode.RAIN_1: KodiWeatherCode.LIGHT_SHOWERS,
     OpenMeteoWeatherCode.RAIN_2: KodiWeatherCode.SHOWERS,
-    OpenMeteoWeatherCode.RAIN_3: KodiWeatherCode.SHOWERS,
+    OpenMeteoWeatherCode.RAIN_3: KodiWeatherCode.HEAVY_RAIN,
     OpenMeteoWeatherCode.FREEZING_RAIN_1: KodiWeatherCode.FREEZING_RAIN,
     OpenMeteoWeatherCode.FREEZING_RAIN_2: KodiWeatherCode.FREEZING_RAIN,
     OpenMeteoWeatherCode.SNOW_1: KodiWeatherCode.SNOW,
     OpenMeteoWeatherCode.SNOW_2: KodiWeatherCode.SNOW,
     OpenMeteoWeatherCode.SNOW_3: KodiWeatherCode.HEAVY_SNOW,
     OpenMeteoWeatherCode.SNOW_GRAINS: KodiWeatherCode.SLEET,
-    OpenMeteoWeatherCode.RAIN_SHOWERS_1: KodiWeatherCode.SHOWERS,
+    OpenMeteoWeatherCode.RAIN_SHOWERS_1: KodiWeatherCode.LIGHT_SHOWERS,
     OpenMeteoWeatherCode.RAIN_SHOWERS_2: KodiWeatherCode.SHOWERS,
     OpenMeteoWeatherCode.RAIN_SHOWERS_3: KodiWeatherCode.SHOWERS,
-    OpenMeteoWeatherCode.SNOW_SHOWERS_1: KodiWeatherCode.SNOW_SHOWERS,
+    OpenMeteoWeatherCode.SNOW_SHOWERS_1: KodiWeatherCode.LIGHT_SNOW_SHOWERS,
     OpenMeteoWeatherCode.SNOW_SHOWERS_2: KodiWeatherCode.SNOW_SHOWERS,
     OpenMeteoWeatherCode.THUNDERSTORM: KodiWeatherCode.THUNDERSTORMS,
     OpenMeteoWeatherCode.THUNDERSTORM_WITH_HAIL_1: KodiWeatherCode.HAIL,
@@ -183,6 +181,7 @@ WIND_DIRECTION_MAP = {
     13: _('NW'),
     14: _('NW'),
     15: _('N'),
+    16: _('N'),
 }
 
 
