@@ -29,7 +29,9 @@ from libs.common.kodi_service import ADDON, ICON, ADDON_NAME
 from libs.converter_service import (
     get_weather_condition_label,
     get_kodi_weather_code,
-    get_wind_direction
+    get_wind_direction,
+    get_temperature,
+    get_wind_speed,
 )
 from libs.open_meteo_api import get_forecast, OPEN_METEO_DATE_TIME_FORMAT, OPEN_METEO_DATE_FORMAT
 
@@ -41,6 +43,7 @@ LONG_DATE_FORMAT = xbmc.getRegion('datelong')
 SHORT_DATE_FORMAT = xbmc.getRegion('dateshort')
 TIME_FORMAT = xbmc.getRegion('time').replace(':%S', '')
 TEMPERATURE_UNIT = xbmc.getRegion('tempunit')
+SPEED_UNIT = xbmc.getRegion('speedunit')
 
 
 class LocationData(NamedTuple):
@@ -125,7 +128,7 @@ def _populate_current_weather(current_info: Dict[str, Any]) -> None:
     window_properties_map = {
         'Current.Condition': get_weather_condition_label(open_meteo_weather_code, is_day),
         'Current.Temperature': str(round(current_info['temperature_2m'])),
-        'Current.Wind': str(current_info['wind_speed_10m']),
+        'Current.Wind': get_wind_speed(current_info['wind_speed_10m'], SPEED_UNIT),
         'Current.WindDirection': get_wind_direction(current_info['wind_direction_10m']),
         'Current.Humidity': str(round(current_info['relative_humidity_2m'])),
         'Current.FeelsLike': str(round(current_info['apparent_temperature'])),
@@ -159,13 +162,14 @@ def _populate_hourly_weather(hourly_info: Dict[str, List[Any]]) -> None:
                                                              hourly_weather.is_day),
             f'{hourly_prefix}.OutlookIcon': f'{kodi_weather_code}.png',
             f'{hourly_prefix}.FanartCode': kodi_weather_code,
-            f'{hourly_prefix}.WindSpeed': str(hourly_weather.wind_speed_10m),
+            f'{hourly_prefix}.WindSpeed': get_wind_speed(hourly_weather.wind_speed_10m, SPEED_UNIT),
             f'{hourly_prefix}.WindDirection': get_wind_direction(hourly_weather.wind_direction_10m),
             f'{hourly_prefix}.Humidity': str(hourly_weather.relative_humidity_2m),
-            f'{hourly_prefix}.Temperature': str(hourly_weather.temperature_2m) + TEMPERATURE_UNIT,
+            f'{hourly_prefix}.Temperature': get_temperature(hourly_weather.temperature_2m,
+                                                            TEMPERATURE_UNIT),
             f'{hourly_prefix}.DewPoint': str(hourly_weather.dew_point_2m),
-            f'{hourly_prefix}.FeelsLike': (str(hourly_weather.apparent_temperature)
-                                           + TEMPERATURE_UNIT),
+            f'{hourly_prefix}.FeelsLike': get_temperature(hourly_weather.apparent_temperature,
+                                                          TEMPERATURE_UNIT),
             f'{hourly_prefix}.Pressure': str(hourly_weather.surface_pressure),
             f'{hourly_prefix}.Precipitation': str(hourly_weather.precipitation_probability) + '%',
         }
@@ -189,15 +193,16 @@ def _populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
         window_properties_map = {
             f'{daily_prefix}.ShortDate': daily_weather.time.strftime(SHORT_DATE_FORMAT),
             f'{daily_prefix}.ShortDay': daily_weather.time.strftime('%a'),
-            f'{daily_prefix}.HighTemperature': (str(daily_weather.temperature_2m_max)
-                                                + TEMPERATURE_UNIT),
-            f'{daily_prefix}.LowTemperature': (str(daily_weather.temperature_2m_min)
-                                               + TEMPERATURE_UNIT),
+            f'{daily_prefix}.HighTemperature': get_temperature(daily_weather.temperature_2m_max,
+                                                               TEMPERATURE_UNIT),
+            f'{daily_prefix}.LowTemperature': get_temperature(daily_weather.temperature_2m_min,
+                                               TEMPERATURE_UNIT),
             f'{daily_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code,
                                                                    is_day=True),
             f'{daily_prefix}.OutlookIcon': f'{kodi_weather_code}.png',
             f'{daily_prefix}.FanartCode': kodi_weather_code,
-            f'{daily_prefix}.WindSpeed': str(daily_weather.wind_speed_10m_max),
+            f'{daily_prefix}.WindSpeed': get_wind_speed(daily_weather.wind_speed_10m_max,
+                                                        SPEED_UNIT),
             f'{daily_prefix}.WindDirection': get_wind_direction(
                 daily_weather.wind_direction_10m_dominant),
             f'{daily_prefix}.Precipitation': (str(daily_weather.precipitation_probability_mean)
@@ -208,12 +213,11 @@ def _populate_daily_weather(daily_info: Dict[str, List[Any]]) -> None:
             # These properties are used in some skins, e.g. aeon.nox.silvo
             window_properties_map.update({
                 f'{day_prefix}.Title': daily_weather.time.strftime('%A'),
-                f'{day_prefix}.Outlook': get_weather_condition_label(daily_weather.weather_code,
-                                                                     is_day=True),
-                f'{day_prefix}.OutlookIcon': f'{kodi_weather_code}.png',
-                f'{day_prefix}.FanartCode': kodi_weather_code,
-                f'{day_prefix}.HighTemp': str(daily_weather.temperature_2m_max) + TEMPERATURE_UNIT,
-                f'{day_prefix}.LowTemp': str(daily_weather.temperature_2m_min) + TEMPERATURE_UNIT,
+                f'{day_prefix}.Outlook': window_properties_map[f'{daily_prefix}.Outlook'],
+                f'{day_prefix}.OutlookIcon': window_properties_map[f'{daily_prefix}.OutlookIcon'],
+                f'{day_prefix}.FanartCode': window_properties_map[f'{daily_prefix}.FanartCode'],
+                f'{day_prefix}.HighTemp': window_properties_map[f'{daily_prefix}.HighTemperature'],
+                f'{day_prefix}.LowTemp': window_properties_map[f'{daily_prefix}.LowTemperature'],
             })
         logger.debug('Setting daily weather %s:\n%s', i, pformat(window_properties_map))
         for prop, value in window_properties_map.items():

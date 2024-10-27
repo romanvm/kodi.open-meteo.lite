@@ -166,3 +166,7 @@ msgstr "Зах"
 msgctxt "#32040"
 msgid "NW"
 msgstr "ПнЗах"
+
+msgctxt "#32041"
+msgid "km/h"
+msgstr "км/г"

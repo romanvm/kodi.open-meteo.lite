@@ -187,3 +187,47 @@ WIND_DIRECTION_MAP = {
 def get_wind_direction(direction_degrees: int) -> str:
     direction_code = round(direction_degrees / 22.5)
     return WIND_DIRECTION_MAP[direction_code]
+
+
+def get_temperature(temperature_celc: int, temperature_unit: str) -> str:
+    if temperature_unit == '°F':
+        return str(round((temperature_celc * 9 / 5) + 32)) + temperature_unit
+    return str(temperature_celc) + '°C'
+
+
+def _wind_speed_to_beaufort(wind_speed_kmh: float) -> int:
+    if wind_speed_kmh < 1:
+        return 0  # Calm
+    elif wind_speed_kmh <= 5:
+        return 1  # Light air
+    elif wind_speed_kmh <= 11:
+        return 2  # Light breeze
+    elif wind_speed_kmh <= 19:
+        return 3  # Gentle breeze
+    elif wind_speed_kmh <= 28:
+        return 4  # Moderate breeze
+    elif wind_speed_kmh <= 38:
+        return 5  # Fresh breeze
+    elif wind_speed_kmh <= 49:
+        return 6  # Strong breeze
+    elif wind_speed_kmh <= 61:
+        return 7  # High wind, moderate gale, near gale
+    elif wind_speed_kmh <= 74:
+        return 8  # Gale, fresh gale
+    elif wind_speed_kmh <= 88:
+        return 9  # Strong/severe gale
+    elif wind_speed_kmh <= 102:
+        return 10  # Storm, whole gale
+    elif wind_speed_kmh <= 117:
+        return 11  # Violent storm
+    return 12  # Hurricane force
+
+
+def get_wind_speed(wind_speed_kmh: float, speed_unit: str) -> str:
+    if speed_unit == 'm/s':
+        return str(round(wind_speed_kmh / 3.6)) + speed_unit
+    if speed_unit == 'mph':
+        return str(round(wind_speed_kmh * 0.621371, 1)) + speed_unit
+    if speed_unit == 'Beaufort':
+        return f'{_wind_speed_to_beaufort(wind_speed_kmh)} {speed_unit}'
+    return str(wind_speed_kmh) + _('km/h')
