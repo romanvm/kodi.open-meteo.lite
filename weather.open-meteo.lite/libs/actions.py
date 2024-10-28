@@ -32,14 +32,11 @@ DIALOG = xbmcgui.Dialog()
 
 def _get_full_location_name(location_info: Dict[str, Any]) -> str:
     name_parts = [location_info['name']]
-    admin1 = location_info.get('admin1')
-    if admin1:
+    if admin1 := location_info.get('admin1'):
         name_parts.append(admin1)
-    admin2 = location_info.get('admin2')
-    if admin2:
+    if admin2 := location_info.get('admin2'):
         name_parts.append(admin2)
-    admin3 = location_info.get('admin3')
-    if admin3:
+    if admin3 := location_info.get('admin3'):
         name_parts.append(admin3)
     name_parts.append(location_info['country'])
     return ', '.join(name_parts)
