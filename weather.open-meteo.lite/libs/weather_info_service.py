@@ -20,7 +20,7 @@ properties of the Weather window (id=12600)
 import logging
 from datetime import datetime, date
 from pprint import pformat
-from typing import NamedTuple, Dict, List, Any
+from typing import NamedTuple, Dict, List, Any, Optional
 
 import xbmc
 from xbmcgui import Window
@@ -113,12 +113,15 @@ class DailyWeather(NamedTuple):
         )
 
 
-def _get_location_data(location_id: str) -> LocationData:
+def _get_location_data(location_id: str) -> Optional[LocationData]:
     name = ADDON.getSettingString(f'{location_id}_name')
     latitude = ADDON.getSettingNumber(f'{location_id}_lat')
     longitude = ADDON.getSettingNumber(f'{location_id}_lon')
     timezone = ADDON.getSettingString(f'{location_id}_timezone')
-    return LocationData(name, latitude, longitude, timezone)
+    location_data = LocationData(name, latitude, longitude, timezone)
+    if not all(location_data):
+        return None
+    return location_data
 
 
 def _populate_current_weather(current_info: Dict[str, Any]) -> None:
@@ -229,10 +232,11 @@ def _populate_general_properties(location_name: str) -> None:
     WEATHER_WINDOW.setProperty('Current.Location', location_name)
     WEATHER_WINDOW.setProperty('WeatherProvider', ADDON_NAME)
     WEATHER_WINDOW.setProperty('WeatherProviderLogo', str(BANNER))
-    WEATHER_WINDOW.setProperty('Weather.IsFetched', 'true')
-    WEATHER_WINDOW.setProperty('Current.IsFetched', 'true')
-    WEATHER_WINDOW.setProperty('Hourly.IsFetched', 'true')
-    WEATHER_WINDOW.setProperty('Daily.IsFetched', 'true')
+    is_fetched = 'true' if location_name else ''
+    WEATHER_WINDOW.setProperty('Weather.IsFetched', is_fetched)
+    WEATHER_WINDOW.setProperty('Current.IsFetched', is_fetched)
+    WEATHER_WINDOW.setProperty('Hourly.IsFetched', is_fetched)
+    WEATHER_WINDOW.setProperty('Daily.IsFetched', is_fetched)
     locations = 0
     for i in range(1, 4):
         location_name = ADDON.getSettingString(f'location{i}_name')
@@ -244,6 +248,10 @@ def _populate_general_properties(location_name: str) -> None:
 
 def populate_weather_info_for_location(location_id: str) -> None:
     location_data = _get_location_data(location_id)
+    if location_data is None:
+        logger.error('Location %s is not set', location_id)
+        _populate_general_properties('')
+        return
     forecast_info = get_forecast(*location_data[1:])
     _populate_current_weather(forecast_info['current'])
     _populate_hourly_weather(forecast_info['hourly'])
