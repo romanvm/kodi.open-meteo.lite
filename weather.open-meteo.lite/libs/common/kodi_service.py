@@ -34,6 +34,7 @@ VERSION = ADDON.getAddonInfo('version')
 PATH = Path(translatePath(ADDON.getAddonInfo('path')))
 PROFILE = Path(translatePath(ADDON.getAddonInfo('profile')))
 ICON = PATH / 'resources'/ 'images' / 'icon.png'
+BANNER = PATH / 'resources' / 'images' / 'banner.jpg'
 
 LOG_FORMAT = '[{addon_id} v.{addon_version}] {filename}:{lineno} - {message}'
 

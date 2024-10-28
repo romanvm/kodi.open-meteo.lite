@@ -25,7 +25,7 @@ from typing import NamedTuple, Dict, List, Any
 import xbmc
 from xbmcgui import Window
 
-from libs.common.kodi_service import ADDON, ICON, ADDON_NAME
+from libs.common.kodi_service import ADDON, BANNER, ADDON_NAME
 from libs.converter_service import (
     get_weather_condition_label,
     get_kodi_weather_code,
@@ -228,7 +228,7 @@ def _populate_general_properties(location_name: str) -> None:
     WEATHER_WINDOW.setProperty('Location', location_name)
     WEATHER_WINDOW.setProperty('Current.Location', location_name)
     WEATHER_WINDOW.setProperty('WeatherProvider', ADDON_NAME)
-    WEATHER_WINDOW.setProperty('WeatherProviderLogo', str(ICON))
+    WEATHER_WINDOW.setProperty('WeatherProviderLogo', str(BANNER))
     WEATHER_WINDOW.setProperty('Weather.IsFetched', 'true')
     WEATHER_WINDOW.setProperty('Current.IsFetched', 'true')
     WEATHER_WINDOW.setProperty('Hourly.IsFetched', 'true')

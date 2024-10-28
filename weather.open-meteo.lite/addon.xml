@@ -18,8 +18,9 @@
     <forum></forum>
     <source>https://github.com/romanvm/kodi.open-meteo.lite</source>
     <assets>
-    <icon>resources/images/icon.png</icon>
-    <fanart>resources/images/fanart.jpg</fanart>
+      <icon>resources/images/icon.png</icon>
+      <fanart>resources/images/fanart.jpg</fanart>
+      <banner>resources/images/banner.jpg</banner>
     </assets>
     <news>Initial release.</news>
   </extension>
