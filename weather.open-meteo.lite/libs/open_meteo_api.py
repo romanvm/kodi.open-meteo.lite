@@ -63,7 +63,7 @@ def search_location(name_query: str) -> List[Dict[str, Any]]:
     return result.get('results')
 
 
-@cache_json()
+@cache_json(ttl_minutes=30)
 def get_forecast(latitude: float, longitude: float, timezone: str) -> Dict[str, Any]:
     params = FORECAST_API_BASE_PARAMS.copy()
     params['latitude'] = str(latitude)
