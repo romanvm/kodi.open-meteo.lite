@@ -69,7 +69,7 @@ msgstr "Туман"
 
 msgctxt "#32016"
 msgid "Fog with rime"
-msgstr "Туман з інеєм"
+msgstr "Туман із ожеледдю"
 
 msgctxt "#32017"
 msgid "Light drizzle"
@@ -85,7 +85,7 @@ msgstr "Густа мряка"
 
 msgctxt "#32020"
 msgid "Freezing drizzle"
-msgstr "Холодна мряка"
+msgstr "Мряка з ожеледдю"
 
 msgctxt "#32021"
 msgid "Light rain"
@@ -101,7 +101,7 @@ msgstr "Сильний дощ"
 
 msgctxt "#32024"
 msgid "Freezing rain"
-msgstr "Холодний дощ"
+msgstr "Дощ із ожеледдю"
 
 msgctxt "#32025"
 msgid "Light snow"
