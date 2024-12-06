@@ -62,8 +62,8 @@ class OpenMeteoWeatherCode(enum.IntEnum):
     RAIN_1 = 61
     RAIN_2 = 62
     RAIN_3 = 63
-    FREEZING_RAIN_1 = 56
-    FREEZING_RAIN_2 = 57
+    FREEZING_RAIN_1 = 66
+    FREEZING_RAIN_2 = 67
     SNOW_1 = 71
     SNOW_2 = 73
     SNOW_3 = 75
